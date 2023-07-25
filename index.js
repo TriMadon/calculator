@@ -30,20 +30,17 @@ function checkInvalidNum(nums) {
 
 function operate(num1, num2, operator) {
 	switch (operator) {
-		case "+": {
+		case "+":
 			return add(num1, num2);
-		}
-		case "-": {
+		case "-":
 			return subtract(num1, num2);
-		}
-		case "*": {
+		case "*":
 			return multiply(num1, num2);
-		}
-		case "/": {
+		case "/":
 			return divide(num1, num2);
-		}
-		default: {
+		default:
 			return operator + " is an invalid operator";
-		}
 	}
 }
+
+console.log(operate(3, 3, "+"));
