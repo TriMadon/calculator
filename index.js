@@ -4,6 +4,18 @@ function add(...nums) {
             return num + " is an invalid input";
         }
     }
-    return nums.reduce((sum, num) => sum + +num);
+    return nums.reduce((sum, num) => sum + num);
 }
+
+function subtract(...nums) {
+    for (const num of nums) {
+        if ((typeof num) !== "number") {
+            return num + " is an invalid input";
+        }
+    }
+    return nums.reduce((sum, num) => sum - num);
+}
+
+
+
 
