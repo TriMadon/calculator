@@ -18,7 +18,7 @@ function divide(...nums) {
 	return nums.reduce((sum, num) => sum / num);
 }
 
-function checkInvalidNum(...nums) {
+function checkInvalidNum(nums) {
 	for (const num of nums) {
 		if (typeof num !== "number") {
 			console.log(num + " is an invalid input");
@@ -26,4 +26,24 @@ function checkInvalidNum(...nums) {
 		}
 	}
 	return false;
+}
+
+function operate(num1, num2, operator) {
+	switch (operator) {
+		case "+": {
+			return add(num1, num2);
+		}
+		case "-": {
+			return subtract(num1, num2);
+		}
+		case "*": {
+			return multiply(num1, num2);
+		}
+		case "/": {
+			return divide(num1, num2);
+		}
+		default: {
+			return operator + " is an invalid operator";
+		}
+	}
 }
