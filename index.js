@@ -1,3 +1,30 @@
+// #region Constants
+
+const numberButtons = document.querySelectorAll(".number-container button");
+const operatorButtons = document.querySelectorAll(".operator-container button");
+const clearButton = document.getElementById("clear-button");
+const equalsButton = document.getElementById("equals-button");
+const typingButtons = new Set([
+	...numberButtons,
+	...operatorButtons,
+	equalsButton,
+]);
+const inputField = document.querySelector(".input");
+const outputField = document.querySelector(".output");
+const textFieldContainer = document.querySelector(".text-field-container");
+const cursor = document.getElementById("customCursor");
+const allButtons = document.querySelectorAll("button");
+
+// #endregion
+
+// #region Variables
+
+let inputText = "";
+
+// #endregion
+
+// #region Calculation functions
+
 function add(...nums) {
 	if (checkInvalidNum(nums)) return "Addition Error";
 	return nums.reduce((sum, num) => sum + num);
@@ -47,26 +74,44 @@ function operate(num1, num2, operator) {
 	}
 }
 
-console.log(operate(3, 3, "/"));
+// #endregion
+
+// #region Display population functions
+
+typingButtons.forEach((button) => {
+	button.addEventListener("click", (e) => {
+		populateInput(e);
+		updateInputVariable();
+	});
+});
+
+function populateInput(e) {
+	inputField.value += e.target.textContent;
+}
+
+function updateInputVariable() {
+	inputText = inputField.value;
+}
+
+inputField.addEventListener("input", () => updateInputVariable());
+
+// #endregion
 
 // #region CSS interactivity
 
 // Make input textarea expand automatically to text
-const inputField = document.querySelector(".input");
 inputField.addEventListener("input", function () {
 	this.style.height = "auto";
 	this.style.height = this.scrollHeight + "px";
 });
 
-// Clicking anywhere within this container 
+// Clicking anywhere within this container
 // will only activate the input textarea
-const textFieldContainer = document.querySelector(".text-field-container");
 textFieldContainer.addEventListener("click", function () {
 	document.querySelector(".input").focus();
 });
 
 // Create a custom cursor to track its location on page
-const cursor = document.getElementById("customCursor");
 document.addEventListener("mousemove", (e) => {
 	cursor.setAttribute(
 		"style",
@@ -76,9 +121,8 @@ document.addEventListener("mousemove", (e) => {
 
 // Increase font size based on the distance
 // from the custom cursor to the button
-const buttons = document.querySelectorAll("button");
 document.addEventListener("mousemove", (e) => {
-	buttons.forEach((button) => {
+	allButtons.forEach((button) => {
 		let rect = button.getBoundingClientRect();
 		let x = e.clientX - (rect.left + rect.width / 2);
 		let y = e.clientY - (rect.top + rect.height / 2);

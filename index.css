@@ -206,6 +206,14 @@ h2 {
 	gap: 10px;
 }
 
+.side-container #clear-button {
+	color: rgb(253, 138, 138);
+}
+
+.side-container #equal-button {
+	color:rgb(192, 253, 131);
+}
+
 /* operator container */
 
 .operator-container {
@@ -219,4 +227,5 @@ h2 {
 	min-width: 30px;
 	max-width: 100%;
 	height: 80px;
+	color: aquamarine;
 }
