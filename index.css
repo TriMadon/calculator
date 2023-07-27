@@ -64,12 +64,14 @@ h2 {
 	cursor: pointer;
 }
 
+
 /* Text field container */
 .text-field-container {
 	background: linear-gradient(to bottom, transparent 20%, #f9faf8 100%);
 	width: 100%;	
 	border-radius: 20px;
 	padding: 1px;
+	cursor: text;
 }
 
 .text-field {
@@ -116,14 +118,13 @@ h2 {
 	overflow-y: hidden;
 	border: none;
 	outline: none;
-	cursor: none;
 }
 
 .output.text {
 	align-self: flex-end;
 	background-color: transparent;
 	color: #f9faf8;
-	font-size: medium;
+	font-size: large;
 	max-width: 100%;
 	padding: 10px 20px;
 	margin-left: auto;
