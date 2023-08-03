@@ -46,10 +46,12 @@ operatorButtons.forEach((button) => {
 
 function appendDisplay(text) {
 	inputField.value += text;
+	inputField.dispatchEvent(new Event("input"));
 }
 
 function writeDisplay(text) {
 	inputField.value = text;
+	inputField.dispatchEvent(new Event("input"));
 }
 
 function updateInputVariable() {
@@ -59,6 +61,7 @@ function updateInputVariable() {
 function clearDisplay() {
 	inputField.value = "";
 	inputText = "";
+	inputField.dispatchEvent(new Event("input"));
 }
 
 // #endregion
@@ -106,18 +109,31 @@ function divide(...nums) {
 }
 
 function operate(num1, num2, operator) {
+	let result;
+
 	switch (operator) {
 		case "+":
-			return add(num1, num2);
+			result = add(num1, num2);
+			break;
 		case "−":
-			return subtract(num1, num2);
+			result = subtract(num1, num2);
+			break;
 		case "×":
-			return multiply(num1, num2);
+			result = multiply(num1, num2);
+			break;
 		case "÷":
-			return divide(num1, num2);
+			result = divide(num1, num2);
+			break;
 		default:
 			return operator + " is an invalid operator";
 	}
+
+	return result
+		.toLocaleString("fullwide", {
+			useGrouping: false,
+			minimumFractionDigits: 10,
+		})
+		.replace(/\.?0+$/, "");
 }
 
 // #endregion
@@ -125,16 +141,11 @@ function operate(num1, num2, operator) {
 // #region CSS interactivity
 
 // Make input textarea expand automatically to text
-allButtons.forEach((button) => {
-	button.addEventListener("click", () => {
-		inputField.dispatchEvent(new Event("input"));
-	});
-});
-
 inputField.addEventListener("input", updateInputAreaSize);
 
 function updateInputAreaSize() {
-	inputField.style.height = this.scrollHeight + "px";
+	inputField.style.height = "1.8em";
+	inputField.style.height = inputField.scrollHeight + "px";
 }
 
 // Set the input field on focus at all times
