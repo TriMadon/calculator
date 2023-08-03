@@ -19,6 +19,36 @@ let inputText = "";
 
 // #endregion
 
+
+
+// #region Display population functions
+
+typingButtons.forEach((button) => {
+	button.addEventListener("click", (e) => {
+		populateInput(e);
+		updateInputVariable();
+	});
+});
+
+inputField.addEventListener("input", () => updateInputVariable());
+clearButton.onclick = () => clearInput();
+
+function populateInput(e) {
+	inputField.value += e.target.textContent;
+}
+
+function updateInputVariable() {
+	inputText = inputField.value;
+}
+
+function clearInput() {
+	inputField.value = "";
+	inputText = "";
+}
+
+// #endregion
+
+
 // #region Calculation functions
 
 function add(...nums) {
@@ -64,33 +94,6 @@ function operate(num1, num2, operator) {
 		default:
 			return operator + " is an invalid operator";
 	}
-}
-
-// #endregion
-
-// #region Display population functions
-
-typingButtons.forEach((button) => {
-	button.addEventListener("click", (e) => {
-		populateInput(e);
-		updateInputVariable();
-	});
-});
-
-inputField.addEventListener("input", () => updateInputVariable());
-clearButton.onclick = () => clearInput();
-
-function populateInput(e) {
-	inputField.value += e.target.textContent;
-}
-
-function updateInputVariable() {
-	inputText = inputField.value;
-}
-
-function clearInput() {
-	inputField.value = "";
-	inputText = "";
 }
 
 // #endregion
