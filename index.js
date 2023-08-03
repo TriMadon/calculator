@@ -77,6 +77,9 @@ typingButtons.forEach((button) => {
 	});
 });
 
+inputField.addEventListener("input", () => updateInputVariable());
+clearButton.onclick = () => clearInput();
+
 function populateInput(e) {
 	inputField.value += e.target.textContent;
 }
@@ -85,7 +88,10 @@ function updateInputVariable() {
 	inputText = inputField.value;
 }
 
-inputField.addEventListener("input", () => updateInputVariable());
+function clearInput() {
+	inputField.value = "";
+	inputText = "";
+}
 
 // #endregion
 
@@ -94,6 +100,13 @@ inputField.addEventListener("input", () => updateInputVariable());
 // Set the input field on focus at all times
 let focusInterval;
 inputField.addEventListener("mouseout", () => {
+	setInputFieldOnFocus();
+});
+inputField.addEventListener("mouseover", () => {
+	clearInterval(focusInterval);
+});
+
+function setInputFieldOnFocus() {
 	focusInterval = setInterval(() => {
 		inputField.setSelectionRange(
 			inputField.value.length,
@@ -101,10 +114,9 @@ inputField.addEventListener("mouseout", () => {
 		);
 		inputField.focus();
 	}, 500);
-});
-inputField.addEventListener("mouseover", () => {
-	clearInterval(focusInterval);
-});
+}
+
+window.onload = () => setInputFieldOnFocus();
 
 // Create a custom cursor to track its location on page
 document.addEventListener("mousemove", (e) => {
