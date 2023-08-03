@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Calculator</title>
+		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css?family=Roboto"
 		/>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
-</head>
-<body>
-    <div class="custom-cursor" id="customCursor"></div>
-    <div class="header">
-        <h1>Calculator</h1>
-    </div>
-    <div class="container">
-        <div class="text-field-container">
-            <div class="text-field">
-                <textarea class="input text" name="input-field" cols="20"></textarea>
-                <div class="output text" name="output-field"></div>
-            </div>
-        </div>
-        <div class="button-container">
-            <div class="number-container">
-                <button id="7">7</button>
-                <button id="8">8</button>
-                <button id="9">9</button>
-                <button id="4">4</button>
-                <button id="5">5</button>
-                <button id="6">6</button>
-                <button id="1">1</button>
-                <button id="2">2</button>
-                <button id="3">3</button>
-                <button id="0">0</button>
-                <button id="dot">.</button>
-            </div>
-            <div class="side-container">
-                <button id="clear-button">AC</button>
-                <div class="operator-container">
-                    <button id="mul-button">×</button>
-                    <button id="div-button">÷</button>
-                    <button id="add-button">+</button>
-                    <button id="sub-button">−</button>
-                </div>
-                <button id="equals-button">=</button>
-            </div>
-        </div>
-    </div>
-    <div class="footer">Copyright © TriMadon 2023</div>
-</body>
+		<link rel="stylesheet" href="index.css" />
+		<script src="index.js" defer></script>
+	</head>
+	<body>
+		<div class="custom-cursor" id="customCursor"></div>
+		<div class="header">
+			<h1>Calculator</h1>
+		</div>
+		<div class="container">
+			<textarea
+				class="input text"
+				name="input-field"
+				cols="20"
+			></textarea>
+			<div class="button-container">
+				<div class="number-container">
+					<button id="7">7</button>
+					<button id="8">8</button>
+					<button id="9">9</button>
+					<button id="4">4</button>
+					<button id="5">5</button>
+					<button id="6">6</button>
+					<button id="1">1</button>
+					<button id="2">2</button>
+					<button id="3">3</button>
+					<button id="0">0</button>
+					<button id="dot">.</button>
+				</div>
+				<div class="side-container">
+					<div class="delete-container">
+						<button id="clear-button">AC</button>
+					</div>
+					<div class="operator-container">
+						<button id="mul-button">×</button>
+						<button id="div-button">÷</button>
+						<button id="add-button">+</button>
+						<button id="sub-button">−</button>
+					</div>
+					<div class="equals-container">
+						<button id="equals-button">=</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">Copyright © TriMadon 2023</div>
+	</body>
 </html>

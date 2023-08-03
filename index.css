@@ -40,14 +40,14 @@ h2 {
 }
 
 .container {
-	flex: 1 1;
+	flex: 0 1;
 	display: flex;
-	padding: 20px;
 	min-width: 300px;
-	width: 500px;
-	max-width: 500px;
+	width: 400px;
+	max-width: 400px;
 	min-height: 300px;
-	height: 500px;
+	height: 370px;
+	max-height: 370px;
 	flex-direction: column;
 	gap: 30px;
 	justify-content: center;
@@ -64,78 +64,32 @@ h2 {
 	cursor: pointer;
 }
 
-/* Text field container */
-.text-field-container {
-	background: linear-gradient(to bottom, transparent 20%, #f9faf8 100%);
-	width: 100%;	
-	border-radius: 20px;
-	padding: 1px;
-}
-
-.text-field {
-	display: flex;
-	background: #1f2937;
-	border-radius: 20px;
-	flex-wrap: wrap;
-	flex-direction: column;
-	justify-content: space-between;
-	gap: 10px;
-	width: 100%;
-}
-
-.text-field-container:hover {
-	animation: text-hover-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
-	animation-fill-mode: both;
-}
-
-@keyframes text-hover-animation {
-	from {
-		box-shadow: 0 0 0em rgb(0 0 0 / 0);
-		scale: 1;
-	}
-	to {
-		scale: 1.05;
-		box-shadow: 0 0 0.5em #f9faf844 ;
-	}
-}
+/* Text field */
 
 .input.text {
-	align-self: flex-start;
+	flex-shrink: 0;
+	box-sizing: border-box;
 	background-color: transparent;
 	color: #f9faf8;
 	padding: 10px 20px;
 	border-radius: 15px;
-	width: 90%;
-	max-width: 100%;
-	height: 1em;
-	max-height: 8em;
+	border: #f9faf8 solid 1px;
+	width: 100%;
+	height: 1.3em;
 	resize: none;
-	margin-right: auto;
-	word-wrap: break-all;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	border: none;
-	outline: none;
-	cursor: none;
-}
-
-.output.text {
-	align-self: flex-end;
-	background-color: transparent;
-	color: #f9faf8;
-	font-size: medium;
-	max-width: 100%;
-	padding: 10px 20px;
-	margin-left: auto;
 }
 
 /* button container */
 
 .button-container {
+	flex-grow: 0;
+	flex-shrink: 1;
 	display: flex;
 	gap: 20px;
 	width: 100%;
-	flex-wrap: wrap;
+	max-height: 80%;
 	user-select: none;
 }
 
@@ -144,10 +98,8 @@ h2 {
 	background-color: transparent;
 	border: none;
 	border-radius: 20px;
-	flex: auto;
-	padding: 0;
-	margin: 0;
-	font-size: 1.2em;
+	font-size: 1em;
+	height: 1.3em;
 	transition: font-size 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	cursor: none;
 }
@@ -173,10 +125,10 @@ h2 {
 
 @keyframes click-animation {
 	from {
-		scale: 1;
+		scale: 1.15;
 	}
 	to {
-		scale: 0.7;
+		scale: 0.8;
 	}
 }
 
@@ -186,32 +138,55 @@ h2 {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
-	max-width: 300px;
+	max-width: 50%;
+	padding: 10px;
+	border-radius: 20px;
+	border: #f9faf8 solid 1px;
 }
 
 .number-container button {
-	flex: 1 1;
-	flex-basis: 31%;
-	min-width: 30px;
-	max-width: 100%;
-	height: 90px;
+	flex-basis: 30%;
 }
 
 /* side container */
 
 .side-container {
-	flex: 1 1;
+	max-height: 300px;
+	flex: initial;
+	width: 50%;
 	display: flex;
-	flex-flow: column wrap;
+	flex-flow: column;
 	gap: 10px;
 }
 
+.side-container .delete-container {
+	display: flex;
+	border-radius: 20px;
+	border: #f9faf8 solid 1px;
+}
+
+.side-container .delete-container > * {
+	flex: 1 1;
+}
+
 .side-container #clear-button {
+	flex-shrink: 1;
+	transition: flex-grow 0.5s ease;
 	color: rgb(253, 138, 138);
 }
 
-.side-container #equal-button {
-	color:rgb(192, 253, 131);
+.side-container .equals-container {
+	display: flex;
+	border-radius: 20px;
+	border: #f9faf8 solid 1px;
+}
+
+.side-container .equals-container > * {
+	flex: 1 1;
+}
+
+.side-container #equals-button {
+	color: rgb(192, 253, 131);
 }
 
 /* operator container */
@@ -219,13 +194,18 @@ h2 {
 .operator-container {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 	gap: 10px;
+	height:200px;
+	border-radius: 20px;
+	border: #f9faf8 solid 1px;
 }
 
 .operator-container button {
 	flex-basis: 46%;
 	min-width: 30px;
 	max-width: 100%;
-	height: 80px;
+	height: 70px;
 	color: aquamarine;
 }

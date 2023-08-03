@@ -4,16 +4,12 @@ const numberButtons = document.querySelectorAll(".number-container button");
 const operatorButtons = document.querySelectorAll(".operator-container button");
 const clearButton = document.getElementById("clear-button");
 const equalsButton = document.getElementById("equals-button");
-const typingButtons = new Set([
-	...numberButtons,
-	...operatorButtons,
-	equalsButton,
-]);
+const typingButtons = new Set([...numberButtons, ...operatorButtons]);
 const inputField = document.querySelector(".input");
 const outputField = document.querySelector(".output");
 const textFieldContainer = document.querySelector(".text-field-container");
 const cursor = document.getElementById("customCursor");
-const allButtons = document.querySelectorAll("button");
+const allButtons = [...document.querySelectorAll("button")];
 
 // #endregion
 
@@ -59,14 +55,10 @@ function operate(num1, num2, operator) {
 	switch (operator) {
 		case "+":
 			return add(num1, num2);
-		case "-":
 		case "−":
 			return subtract(num1, num2);
-		case "*":
 		case "×":
-		case "x":
 			return multiply(num1, num2);
-		case "/":
 		case "÷":
 			return divide(num1, num2);
 		default:
@@ -99,18 +91,6 @@ inputField.addEventListener("input", () => updateInputVariable());
 
 // #region CSS interactivity
 
-// Make input textarea expand automatically to text
-inputField.addEventListener("input", function () {
-	this.style.height = "auto";
-	this.style.height = this.scrollHeight + "px";
-});
-
-// Clicking anywhere within this container
-// will only activate the input textarea
-textFieldContainer.addEventListener("click", function () {
-	document.querySelector(".input").focus();
-});
-
 // Create a custom cursor to track its location on page
 document.addEventListener("mousemove", (e) => {
 	cursor.setAttribute(
@@ -121,14 +101,16 @@ document.addEventListener("mousemove", (e) => {
 
 // Increase font size based on the distance
 // from the custom cursor to the button
+let rects = allButtons.map((button) => button.getBoundingClientRect());
+
 document.addEventListener("mousemove", (e) => {
-	allButtons.forEach((button) => {
-		let rect = button.getBoundingClientRect();
+	allButtons.forEach((button, index) => {
+		let rect = rects[index];
 		let x = e.clientX - (rect.left + rect.width / 2);
 		let y = e.clientY - (rect.top + rect.height / 2);
-		let distance = Math.sqrt(x * x + y * y) - 100;
-		let scale = Math.min(100, Math.max(0, 100 - distance)) / 140;
-		button.style.fontSize = `${scale + 1.2}em`;
+		let distance = Math.sqrt(x * x + y * y) - 30;
+		let scale = Math.min(100, Math.max(0, 100 - distance)) / 200;
+		button.style.transform = `scale(${1 + scale})`;
 	});
 });
 
