@@ -26,14 +26,13 @@ let inputText = "",
 // #region Display population functions
 
 typingButtons.forEach((button) => {
-	button.addEventListener("click", (e) => {
+	button.addEventListener("click", () => {
 		appendDisplay(button.textContent);
 		updateInputVariable();
 		extractInput();
 	});
 });
 
-inputField.addEventListener("input", () => updateInputVariable());
 clearButton.onclick = () => clearDisplay();
 equalsButton.onclick = () => {
 	if (isInputValid()) {
@@ -142,6 +141,19 @@ function operate(num1, num2, operator) {
 // #endregion
 
 // #region CSS interactivity
+
+// Make input textarea expand automatically to text
+allButtons.forEach((button) => {
+	button.addEventListener("click", () => {
+		inputField.dispatchEvent(new Event("input"));
+	});
+});
+
+inputField.addEventListener("input", updateInputAreaSize);
+
+function updateInputAreaSize() {
+	inputField.style.height = this.scrollHeight + "px";
+}
 
 // Set the input field on focus at all times
 let focusInterval;
