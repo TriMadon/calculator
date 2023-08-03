@@ -91,6 +91,15 @@ inputField.addEventListener("input", () => updateInputVariable());
 
 // #region CSS interactivity
 
+// Set the input field on focus at all times
+setInterval(() => {
+	inputField.setSelectionRange(
+		inputField.value.length,
+		inputField.value.length
+	);
+	inputField.focus();
+}, 500);
+
 // Create a custom cursor to track its location on page
 document.addEventListener("mousemove", (e) => {
 	cursor.setAttribute(
