@@ -15,39 +15,61 @@ const allButtons = [...document.querySelectorAll("button")];
 
 // #region Variables
 
-let inputText = "";
+let inputText = "",
+	num1,
+	num2,
+	operator,
+	currAns;
 
 // #endregion
-
-
 
 // #region Display population functions
 
 typingButtons.forEach((button) => {
 	button.addEventListener("click", (e) => {
-		populateInput(e);
+		appendDisplay(button.textContent);
 		updateInputVariable();
+		extractInput();
 	});
 });
 
 inputField.addEventListener("input", () => updateInputVariable());
-clearButton.onclick = () => clearInput();
+clearButton.onclick = () => clearDisplay();
+equalsButton.onclick = () => writeDisplay(operate(num1, num2, operator));
 
-function populateInput(e) {
-	inputField.value += e.target.textContent;
+function appendDisplay(text) {
+	inputField.value += text;
+}
+
+function writeDisplay(text) {
+	inputField.value = text;
 }
 
 function updateInputVariable() {
 	inputText = inputField.value;
 }
 
-function clearInput() {
+function clearDisplay() {
 	inputField.value = "";
 	inputText = "";
 }
 
 // #endregion
 
+// #region I/O processing
+
+function extractInput() {
+	if(!inputText || inputText === "") {
+		return;
+	}
+	nums = inputText.split(/[+−×÷]/);
+	num1 = !nums[0]? undefined : +nums[0];
+	num2 = !nums[1]? undefined : +nums[1];
+	opMatch = inputText.match(/[+−×÷]/);
+	operator = opMatch? opMatch[0] : undefined;
+}
+
+// #endregion
 
 // #region Calculation functions
 
@@ -92,6 +114,7 @@ function operate(num1, num2, operator) {
 		case "÷":
 			return divide(num1, num2);
 		default:
+			console.log(typeof operator);
 			return operator + " is an invalid operator";
 	}
 }
