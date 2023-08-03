@@ -20,8 +20,14 @@
 			<textarea
 				class="input text"
 				name="input-field"
-				cols="20"
-                readonly
+				contenteditable="true"
+				oncut="return false"
+				onpaste="return false"
+				onkeydown="return false;"
+				ondragenter="return false;"
+				ondragleave="return false;"
+				ondragover="return false;"
+				ondrop="return false;"
 			></textarea>
 			<div class="button-container">
 				<div class="number-container">
