@@ -2,6 +2,9 @@
 
 This is a calculator made in HTML, CSS, and JS. It contains the four default operations in addition to input validation.
 
+You can access the project via:
+<https://trimadon.github.io/calculator/>
+
 Note: infinity is not allowed.
 
 sound credits:
