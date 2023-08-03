@@ -30,7 +30,10 @@ typingButtons.forEach((button) => {
 	});
 });
 
-clearButton.onclick = () => clearDisplay();
+clearButton.onclick = () => {
+	clearDisplay();
+	clearData();
+};
 equalsButton.onclick = () => {
 	if (isInputValid()) {
 		writeDisplay(operate(num1, num2, operator));
@@ -60,8 +63,14 @@ function updateInputVariable() {
 
 function clearDisplay() {
 	inputField.value = "";
-	inputText = "";
 	inputField.dispatchEvent(new Event("input"));
+}
+
+function clearData() {
+	inputText = "";
+	num1 = undefined,
+	num2 = undefined,
+	operator = undefined;
 }
 
 // #endregion
