@@ -12,6 +12,24 @@ const allButtons = [...document.querySelectorAll("button")];
 const deathDialog = document.getElementById("death-dialog");
 const retryButton = document.getElementById("retry-button");
 const deathSound = document.getElementById("death-sound");
+const allowedKeysMap = {
+	0: 0,
+	1: 1,
+	2: 2,
+	3: 3,
+	4: 4,
+	5: 5,
+	6: 6,
+	7: 7,
+	8: 8,
+	9: 9,
+	".": ".",
+	"*": "×",
+	"/": "÷",
+	"+": "+",
+	"-": "−",
+};
+const allowedOperators = ["*", "/", "+", "-"];
 
 // #endregion
 
@@ -24,13 +42,35 @@ let inputText = "",
 
 // #endregion
 
+// #region Keyboard functions
+
+document.addEventListener("keydown", (e) => {
+	if (e.key in allowedKeysMap) {
+		typeInput(allowedKeysMap[e.key]);
+	}
+	if (allowedOperators.includes(e.key)) {
+		calculate(allowedKeysMap[e.key]);
+	}
+	if (e.key === "Delete") {
+		clearDisplay();
+		clearData();
+	}
+	if (e.key === "Backspace") {
+		writeDisplay(inputText.slice(0, -1));
+		updateInputVariable();
+	}
+	if (e.key === "Enter") {
+		calculate();
+	}
+});
+
+// #endregion
+
 // #region Display population functions
 
 typingButtons.forEach((button) => {
 	button.addEventListener("click", () => {
-		appendDisplay(button.textContent);
-		updateInputVariable();
-		extractInput();
+		typeInput(button.textContent);
 	});
 });
 
@@ -49,6 +89,12 @@ equalsButton.onclick = () => calculate();
 operatorButtons.forEach((button) => {
 	button.onclick = () => calculate(button.textContent);
 });
+
+function typeInput(char) {
+	appendDisplay(char);
+	updateInputVariable();
+	extractInput();
+}
 
 function calculate(appendText = "") {
 	if (isInputValid()) {
