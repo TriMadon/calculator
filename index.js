@@ -8,6 +8,9 @@ const typingButtons = new Set([...numberButtons, ...operatorButtons]);
 const inputField = document.querySelector(".input");
 const cursor = document.getElementById("customCursor");
 const allButtons = [...document.querySelectorAll("button")];
+const deathDialog = document.getElementById("death-dialog");
+const retryButton = document.getElementById("retry-button");
+const deathSound = document.getElementById("death-sound");
 
 // #endregion
 
@@ -34,18 +37,20 @@ clearButton.onclick = () => {
 	clearDisplay();
 	clearData();
 };
-equalsButton.onclick = () => {
-	if (isInputValid()) {
-		writeDisplay(operate(num1, num2, operator));
-	}
-};
+equalsButton.onclick = () => calculate();
 operatorButtons.forEach((button) => {
-	button.onclick = () => {
-		if (isInputValid()) {
-			writeDisplay(operate(num1, num2, operator) + button.textContent);
-		}
-	};
+	button.onclick = () => calculate(button.textContent);
 });
+
+function calculate(appendText = "") {
+	if (isInputValid()) {
+		writeDisplay(operate(num1, num2, operator) + appendText);
+	}
+	let isDividedByZero = num2 === 0 && operator === "÷";
+	if (isDividedByZero) {
+		showDeathDialog();
+	}
+}
 
 function appendDisplay(text) {
 	inputField.value += text;
@@ -68,9 +73,7 @@ function clearDisplay() {
 
 function clearData() {
 	inputText = "";
-	num1 = undefined,
-	num2 = undefined,
-	operator = undefined;
+	(num1 = undefined), (num2 = undefined), (operator = undefined);
 }
 
 // #endregion
@@ -200,5 +203,23 @@ document.addEventListener("mousemove", (e) => {
 		button.style.transform = `scale(${1 + scale})`;
 	});
 });
+
+// Display the division by zero message
+retryButton.addEventListener("click", () => {
+	deathDialog.close();
+	clearDisplay();
+	clearData();
+});
+
+deathDialog.addEventListener("cancel", () => {
+	deathDialog.close();
+	clearDisplay();
+	clearData();
+});
+
+function showDeathDialog() {
+	deathDialog.showModal();
+	deathSound.play();
+}
 
 // #endregion
