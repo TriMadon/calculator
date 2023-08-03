@@ -40,6 +40,13 @@ equalsButton.onclick = () => {
 		writeDisplay(operate(num1, num2, operator));
 	}
 };
+operatorButtons.forEach((button) => {
+	button.onclick = () => {
+		if (isInputValid()) {
+			writeDisplay(operate(num1, num2, operator) + button.textContent);
+		}
+	};
+});
 
 function appendDisplay(text) {
 	inputField.value += text;
@@ -74,15 +81,12 @@ function extractInput() {
 }
 
 function isInputValid() {
-	if (
-		(!num1 && num1 !== 0) ||
+	return (!num1 && num1 !== 0) ||
 		(!num2 && num2 !== 0) ||
 		!operator ||
 		operator.length > 1
-	) {
-		return false;
-	}
-	return true;
+		? false
+		: true;
 }
 
 // #endregion
