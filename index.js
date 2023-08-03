@@ -3,6 +3,7 @@
 const numberButtons = document.querySelectorAll(".number-container button");
 const operatorButtons = document.querySelectorAll(".operator-container button");
 const clearButton = document.getElementById("clear-button");
+const backButton = document.getElementById("back-button");
 const equalsButton = document.getElementById("equals-button");
 const typingButtons = new Set([...numberButtons, ...operatorButtons]);
 const inputField = document.querySelector(".input");
@@ -37,7 +38,14 @@ clearButton.onclick = () => {
 	clearDisplay();
 	clearData();
 };
+
+backButton.onclick = () => {
+	writeDisplay(inputText.slice(0, -1));
+	updateInputVariable();
+};
+
 equalsButton.onclick = () => calculate();
+
 operatorButtons.forEach((button) => {
 	button.onclick = () => calculate(button.textContent);
 });
@@ -45,6 +53,7 @@ operatorButtons.forEach((button) => {
 function calculate(appendText = "") {
 	if (isInputValid()) {
 		writeDisplay(operate(num1, num2, operator) + appendText);
+		updateInputVariable();
 	}
 	let isDividedByZero = num2 === 0 && operator === "÷";
 	if (isDividedByZero) {
