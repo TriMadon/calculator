@@ -6,8 +6,6 @@ const clearButton = document.getElementById("clear-button");
 const equalsButton = document.getElementById("equals-button");
 const typingButtons = new Set([...numberButtons, ...operatorButtons]);
 const inputField = document.querySelector(".input");
-const outputField = document.querySelector(".output");
-const textFieldContainer = document.querySelector(".text-field-container");
 const cursor = document.getElementById("customCursor");
 const allButtons = [...document.querySelectorAll("button")];
 
@@ -18,8 +16,7 @@ const allButtons = [...document.querySelectorAll("button")];
 let inputText = "",
 	num1,
 	num2,
-	operator,
-	currAns;
+	operator;
 
 // #endregion
 
@@ -66,7 +63,7 @@ function clearDisplay() {
 
 // #endregion
 
-// #region I/O processing
+// #region Input processing
 
 function extractInput() {
 	if (!inputText || inputText === "") {
@@ -93,33 +90,19 @@ function isInputValid() {
 // #region Calculation functions
 
 function add(...nums) {
-	if (checkInvalidNum(nums)) return "Addition Error";
 	return nums.reduce((sum, num) => sum + num);
 }
 
 function subtract(...nums) {
-	if (checkInvalidNum(nums)) return "Subtraction Error";
 	return nums.reduce((sum, num) => sum - num);
 }
 
 function multiply(...nums) {
-	if (checkInvalidNum(nums)) return "Multiplication Error";
 	return nums.reduce((sum, num) => sum * num);
 }
 
 function divide(...nums) {
-	if (checkInvalidNum(nums)) return "Division Error";
 	return nums.reduce((sum, num) => sum / num);
-}
-
-function checkInvalidNum(nums) {
-	for (const num of nums) {
-		if (typeof num !== "number") {
-			console.log(num + " is an invalid input");
-			return true;
-		}
-	}
-	return false;
 }
 
 function operate(num1, num2, operator) {
@@ -133,7 +116,6 @@ function operate(num1, num2, operator) {
 		case "÷":
 			return divide(num1, num2);
 		default:
-			console.log(typeof operator);
 			return operator + " is an invalid operator";
 	}
 }
