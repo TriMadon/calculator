@@ -35,7 +35,11 @@ typingButtons.forEach((button) => {
 
 inputField.addEventListener("input", () => updateInputVariable());
 clearButton.onclick = () => clearDisplay();
-equalsButton.onclick = () => writeDisplay(operate(num1, num2, operator));
+equalsButton.onclick = () => {
+	if (isInputValid()) {
+		writeDisplay(operate(num1, num2, operator));
+	}
+};
 
 function appendDisplay(text) {
 	inputField.value += text;
@@ -59,14 +63,26 @@ function clearDisplay() {
 // #region I/O processing
 
 function extractInput() {
-	if(!inputText || inputText === "") {
+	if (!inputText || inputText === "") {
 		return;
 	}
 	nums = inputText.split(/[+−×÷]/);
-	num1 = !nums[0]? undefined : +nums[0];
-	num2 = !nums[1]? undefined : +nums[1];
+	num1 = !nums[0] ? undefined : +nums[0];
+	num2 = !nums[1] ? undefined : +nums[1];
 	opMatch = inputText.match(/[+−×÷]/);
-	operator = opMatch? opMatch[0] : undefined;
+	operator = opMatch ? opMatch[0] : undefined;
+}
+
+function isInputValid() {
+	if (
+		(!num1 && num1 !== 0) ||
+		(!num2 && num2 !== 0) ||
+		!operator ||
+		operator.length > 1
+	) {
+		return false;
+	}
+	return true;
 }
 
 // #endregion
