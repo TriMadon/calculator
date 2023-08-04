@@ -29,7 +29,10 @@ const allowedKeysMap = {
 	"+": "+",
 	"-": "−",
 };
-const allowedOperators = ["*", "/", "+", "-"];
+const allowedOperatorKeys = ["*", "/", "+", "-"];
+const operators = ["×", "÷", "+", "−"];
+const nonStackables = [...operators, "."];
+const nonDuplicables = [...operators, ".", "-"];
 
 // #endregion
 
@@ -45,10 +48,19 @@ let inputText = "",
 // #region Keyboard functions
 
 document.addEventListener("keydown", (e) => {
-	if (e.key in allowedKeysMap) {
-		typeInput(allowedKeysMap[e.key]);
+	let key = allowedKeysMap[e.key];
+	if (
+		e.key === "-" &&
+		(!inputText || operators.includes(inputText[inputText.length - 1]))
+	) {
+		key = "-";
 	}
-	if (allowedOperators.includes(e.key)) {
+	if (e.key in allowedKeysMap) {
+		if (isCharValid(key)) {
+			typeChar(key);
+		}
+	}
+	if (allowedOperatorKeys.includes(e.key)) {
 		calculate(allowedKeysMap[e.key]);
 	}
 	if (e.key === "Delete") {
@@ -70,7 +82,9 @@ document.addEventListener("keydown", (e) => {
 
 typingButtons.forEach((button) => {
 	button.addEventListener("click", () => {
-		typeInput(button.textContent);
+		if (isCharValid(button.value)) {
+			typeChar(button.value);
+		}
 	});
 });
 
@@ -82,6 +96,7 @@ clearButton.onclick = () => {
 backButton.onclick = () => {
 	writeDisplay(inputText.slice(0, -1));
 	updateInputVariable();
+	extractInput();
 };
 
 equalsButton.onclick = () => calculate();
@@ -90,7 +105,7 @@ operatorButtons.forEach((button) => {
 	button.onclick = () => calculate(button.textContent);
 });
 
-function typeInput(char) {
+function typeChar(char) {
 	appendDisplay(char);
 	updateInputVariable();
 	extractInput();
@@ -153,6 +168,21 @@ function isInputValid() {
 		operator.length > 1
 		? false
 		: true;
+}
+
+function isCharValid(char) {
+	if (
+		(nonStackables.includes(char) &&
+			nonStackables.includes(inputText[inputText.length - 1])) ||
+		(operators.includes(char) &&
+			(inputText === "" ||
+				operators.some((operator) => inputText.includes(operator)))) ||
+		(nonDuplicables.includes(char) &&
+			char === inputText[inputText.length - 1])
+	) {
+		return false;
+	}
+	return true;
 }
 
 // #endregion
