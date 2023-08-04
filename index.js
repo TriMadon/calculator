@@ -29,6 +29,7 @@ const allowedKeysMap = {
 	"+": "+",
 	"-": "−",
 	"^": "^",
+	"%": "%",
 };
 const allowedOperatorKeys = ["*", "/", "+", "-", "^", "%"];
 const operators = ["×", "÷", "+", "−", "^", "%"];
