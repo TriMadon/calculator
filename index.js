@@ -8,6 +8,7 @@ const backButton = document.getElementById("back-button");
 const equalsButton = document.getElementById("equals-button");
 const typingButtons = new Set([...numberButtons, ...operatorButtons]);
 const inputField = document.querySelector(".input");
+const answerDiv = document.querySelector(".answer");
 const cursor = document.getElementById("customCursor");
 const allButtons = [...document.querySelectorAll(".button-container button")];
 const deathDialog = document.getElementById("death-dialog");
@@ -118,6 +119,7 @@ function calculate(appendText = "") {
 	if (isInputValid()) {
 		writeDisplay(operate(num1, num2, operator) + appendText);
 		updateInputVariable();
+		answerDiv.textContent = "";
 	}
 	let isDividedByZero = num2 === 0 && (operator === "÷" || operator === "%");
 	if (isDividedByZero) {
@@ -162,6 +164,11 @@ function extractInput() {
 	num2 = !nums[1] ? undefined : +nums[1];
 	opMatch = inputText.match(/[+−×÷^%]/);
 	operator = opMatch ? opMatch[0] : undefined;
+	if (isInputValid()) {
+		answerDiv.textContent = "= " + operate(num1, num2, operator);
+	} else {
+		answerDiv.textContent = "";
+	}
 }
 
 function isInputValid() {
@@ -260,7 +267,7 @@ inputField.addEventListener("input", updateInputAreaSize);
 function updateInputAreaSize() {
 	inputField.style.height = "1.8em";
 	inputField.style.height = inputField.scrollHeight + "px";
-	mainContainer.style.height = (370 + inputField.scrollHeight) + "px";
+	mainContainer.style.height = 370 + inputField.scrollHeight + "px";
 }
 
 // Set the input field on focus at all times
