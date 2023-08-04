@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo&display=swap");
+
 * {
-	font-family: Roboto, Georgia, "Times New Roman", Times, serif;
+	font-family: Chivo, Roboto, Georgia, "Times New Roman", Times, serif;
 	font-size: xx-large;
 }
 
@@ -41,17 +43,20 @@ h2 {
 }
 
 .container {
-	flex: 0 1 370px;
+	flex: 0 1;
 	display: flex;
 	min-width: 300px;
-	width: 400px;
-	max-width: 400px;
+	width: 500px;
+	max-width: 550px;
 	min-height: 300px;
 	height: 370px;
 	flex-direction: column;
 	gap: 30px;
 	justify-content: center;
 	align-items: center;
+	padding: 40px 30px;
+	border: 1px #f9faf8 solid;
+	border-radius: 20px;
 }
 
 .custom-cursor {
@@ -66,6 +71,16 @@ h2 {
 
 /* Text field */
 
+.text-field {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	border-radius: 15px;
+	border: #f9faf8 solid 1px;
+	padding-right: 10px;
+	width: 100%;
+}
+
 .input.text {
 	flex-grow: 1;
 	flex-shrink: 0;
@@ -73,9 +88,9 @@ h2 {
 	background-color: transparent;
 	color: #f9faf8;
 	padding: 10px 20px;
-	border-radius: 15px;
-	border: #f9faf8 solid 1px;
-	width: 100%;
+	outline: none;
+	border: none;
+	width: 80%;
 	max-width: 100%;
 	height: 1.8em;
 	max-height: 8em;
@@ -85,19 +100,7 @@ h2 {
 	word-wrap: break-all;
 }
 
-/* button container */
-
-.button-container {
-	flex-grow: 0;
-	flex-shrink: 1;
-	display: flex;
-	gap: 20px;
-	width: 100%;
-	max-height: 80%;
-	user-select: none;
-}
-
-.button-container button {
+.text-field button {
 	color: #f9faf8;
 	background-color: transparent;
 	border: none;
@@ -106,9 +109,35 @@ h2 {
 	height: 1.3em;
 	transition: font-size 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	cursor: none;
+	font-size: larger;
 }
 
-.button-container button:hover {
+/* button container */
+
+.button-container {
+	flex-grow: 0;
+	flex-shrink: 1;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	width: 100%;
+	max-height: 80%;
+	user-select: none;
+}
+
+.container button {
+	color: #f9faf8;
+	background-color: transparent;
+	border: none;
+	border-radius: 20px;
+	font-size: 1em;
+	height: 1.3em;
+	transition: font-size 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	cursor: none;
+	font-size: larger;
+}
+
+.container button:hover {
 	animation: hover-animation cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s;
 	animation-fill-mode: both;
 }
@@ -122,7 +151,7 @@ h2 {
 	}
 }
 
-.button-container button:active {
+.container button:active {
 	animation: click-animation 0.1s;
 	animation-fill-mode: forwards;
 }
@@ -139,22 +168,32 @@ h2 {
 /* numbers container */
 
 .number-container {
+	align-self: stretch;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
 	max-width: 50%;
-	padding: 10px;
-	border-radius: 20px;
-	border: #f9faf8 solid 1px;
 }
 
 .number-container button {
 	flex-basis: 30%;
 }
 
+.vertical-line {
+	width: 1px;
+	background: linear-gradient(
+		to top,
+		rgba(249, 250, 248, 0),
+		rgba(249, 250, 248, 1),
+		rgba(249, 250, 248, 0)
+	);
+	align-self: stretch;
+}
+
 /* side container */
 
 .side-container {
+	align-self: stretch;
 	max-height: 300px;
 	flex: initial;
 	width: 50%;
@@ -165,8 +204,6 @@ h2 {
 
 .side-container .delete-container {
 	display: flex;
-	border-radius: 20px;
-	border: #f9faf8 solid 1px;
 }
 
 .side-container .delete-container > * {
@@ -181,8 +218,6 @@ h2 {
 
 .side-container .equals-container {
 	display: flex;
-	border-radius: 20px;
-	border: #f9faf8 solid 1px;
 }
 
 .side-container .equals-container > * {
@@ -191,6 +226,7 @@ h2 {
 
 .side-container #equals-button {
 	color: rgb(192, 253, 131);
+	font-size: larger;
 }
 
 /* operator container */
@@ -200,18 +236,18 @@ h2 {
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
+	padding: 10px;
 	gap: 10px;
 	height: 200px;
-	border-radius: 20px;
-	border: #f9faf8 solid 1px;
 }
 
 .operator-container button {
-	flex-basis: 46%;
+	flex-basis: 29%;
 	min-width: 30px;
 	max-width: 100%;
-	height: 70px;
+	height: 60px;
 	color: aquamarine;
+	font-size: larger;
 }
 
 /* Dailog  */

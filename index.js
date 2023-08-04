@@ -1,5 +1,6 @@
 // #region Constants
 
+const mainContainer = document.querySelector(".container");
 const numberButtons = document.querySelectorAll(".number-container button");
 const operatorButtons = document.querySelectorAll(".operator-container button");
 const clearButton = document.getElementById("clear-button");
@@ -8,7 +9,7 @@ const equalsButton = document.getElementById("equals-button");
 const typingButtons = new Set([...numberButtons, ...operatorButtons]);
 const inputField = document.querySelector(".input");
 const cursor = document.getElementById("customCursor");
-const allButtons = [...document.querySelectorAll("button")];
+const allButtons = [...document.querySelectorAll(".button-container button")];
 const deathDialog = document.getElementById("death-dialog");
 const retryButton = document.getElementById("retry-button");
 const deathSound = document.getElementById("death-sound");
@@ -259,6 +260,7 @@ inputField.addEventListener("input", updateInputAreaSize);
 function updateInputAreaSize() {
 	inputField.style.height = "1.8em";
 	inputField.style.height = inputField.scrollHeight + "px";
+	mainContainer.style.height = (370 + inputField.scrollHeight) + "px";
 }
 
 // Set the input field on focus at all times

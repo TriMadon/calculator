@@ -27,18 +27,21 @@
 			<h1>Calculator</h1>
 		</div>
 		<div class="container">
-			<textarea
-				class="input text"
-				name="input-field"
-				contenteditable="true"
-				oncut="return false"
-				onpaste="return false"
-				onkeydown="return false;"
-				ondragenter="return false;"
-				ondragleave="return false;"
-				ondragover="return false;"
-				ondrop="return false;"
-			></textarea>
+			<div class="text-field">
+				<textarea
+					class="input text"
+					name="input-field"
+					contenteditable="true"
+					oncut="return false"
+					onpaste="return false"
+					onkeydown="return false;"
+					ondragenter="return false;"
+					ondragleave="return false;"
+					ondragover="return false;"
+					ondrop="return false;"
+				></textarea>
+				<button id="back-button">DEL</button>
+			</div>
 			<div class="button-container">
 				<div class="number-container">
 					<button value="7">7</button>
@@ -54,17 +57,17 @@
 					<button value=".">.</button>
 					<button value="-">-</button>
 				</div>
+				<div class="vertical-line"></div>
 				<div class="side-container">
 					<div class="delete-container">
-						<button id="back-button">DEL</button>
 						<button id="clear-button">AC</button>
 					</div>
 					<div class="operator-container">
 						<button value="×">×</button>
 						<button value="÷">÷</button>
+						<button value="^">^</button>
 						<button value="+">+</button>
 						<button value="−">−</button>
-						<button value="^">^</button>
 						<button value="%">%</button>
 					</div>
 					<div class="equals-container">
