@@ -113,6 +113,7 @@ function typeChar(char) {
 	appendDisplay(char);
 	updateInputVariable();
 	extractInput();
+	inputField.classList.remove("animate-slide-in");
 }
 
 function calculate(appendText = "") {
@@ -120,6 +121,8 @@ function calculate(appendText = "") {
 		writeDisplay(operate(num1, num2, operator) + appendText);
 		updateInputVariable();
 		answerDiv.textContent = "";
+		answerDiv.classList.remove("animate-slide-in");
+		inputField.classList.add("animate-slide-in");
 	}
 	let isDividedByZero = num2 === 0 && (operator === "÷" || operator === "%");
 	if (isDividedByZero) {
@@ -166,9 +169,11 @@ function extractInput() {
 	opMatch = inputText.match(/[+−×÷^%]/);
 	operator = opMatch ? opMatch[0] : undefined;
 	if (isInputValid()) {
-		answerDiv.textContent = "= " + operate(num1, num2, operator);
+		answerDiv.textContent = "= " + +operate(num1, num2, operator);
+		answerDiv.classList.add("animate-slide-in");
 	} else {
 		answerDiv.textContent = "";
+		answerDiv.classList.remove("animate-slide-in");
 	}
 }
 
