@@ -144,6 +144,7 @@ function updateInputVariable() {
 function clearDisplay() {
 	inputField.value = "";
 	inputField.dispatchEvent(new Event("input"));
+	answerDiv.textContent = "";
 }
 
 function clearData() {
