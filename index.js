@@ -305,6 +305,10 @@ document.addEventListener("mousemove", (e) => {
 // from the custom cursor to the button
 let rects = allButtons.map((button) => button.getBoundingClientRect());
 
+window.addEventListener("resize", () => {
+	rects = allButtons.map((button) => button.getBoundingClientRect());
+});
+
 document.addEventListener("mousemove", (e) => {
 	allButtons.forEach((button, index) => {
 		let rect = rects[index];
