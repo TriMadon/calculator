@@ -28,9 +28,10 @@ const allowedKeysMap = {
 	"/": "÷",
 	"+": "+",
 	"-": "−",
+	"^": "^",
 };
-const allowedOperatorKeys = ["*", "/", "+", "-"];
-const operators = ["×", "÷", "+", "−"];
+const allowedOperatorKeys = ["*", "/", "+", "-", "^"];
+const operators = ["×", "÷", "+", "−", "^"];
 const nonStackables = [...operators, "."];
 const nonDuplicables = [...operators, ".", "-"];
 
@@ -154,10 +155,10 @@ function extractInput() {
 	if (!inputText || inputText === "") {
 		return;
 	}
-	nums = inputText.split(/[+−×÷]/);
+	nums = inputText.split(/[+−×÷^]/);
 	num1 = !nums[0] ? undefined : +nums[0];
 	num2 = !nums[1] ? undefined : +nums[1];
-	opMatch = inputText.match(/[+−×÷]/);
+	opMatch = inputText.match(/[+−×÷^]/);
 	operator = opMatch ? opMatch[0] : undefined;
 }
 
@@ -205,6 +206,10 @@ function divide(...nums) {
 	return nums.reduce((sum, num) => sum / num);
 }
 
+function power(...nums) {
+	return nums.reduce((sum, num) => sum ** num);
+}
+
 function operate(num1, num2, operator) {
 	let result;
 
@@ -220,6 +225,9 @@ function operate(num1, num2, operator) {
 			break;
 		case "÷":
 			result = divide(num1, num2);
+			break;
+		case "^":
+			result = power(num1, num2);
 			break;
 		default:
 			return operator + " is an invalid operator";
