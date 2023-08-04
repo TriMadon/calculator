@@ -66,20 +66,16 @@ document.addEventListener("keydown", (e) => {
 	}
 	if (allowedOperatorKeys.includes(e.key)) {
 		calculate(allowedKeysMap[e.key]);
-	}
-	if (e.key === "Delete") {
+	} else if (e.key === "Delete") {
 		clearDisplay();
 		clearData();
-	}
-	if (e.key === "Backspace") {
+	} else if (e.key === "Backspace") {
 		writeDisplay(inputText.slice(0, -1));
 		updateInputVariable();
-	}
-	if (e.key === "Enter") {
+	} else if (e.key === "Enter") {
 		calculate();
 	}
 });
-
 // #endregion
 
 // #region Display population functions
